@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Creatr SMS</title>
+	</head>
+	<body>
+		<h1>Creatr</h1>
+		<h2>Device Info:</h2>
+		<div id="deviceProperties"></div>
+
+		<h2>Pusher</h2>
+		<label>Connection status: </label><span id="connectionStatus">not loaded</span><br />
+		<label>Subscription status: </label><span id="subscriptionStatus">not loaded</span><br />
+
+		<h2>SMS Messages</h2>
+		<table id="myEventData"></table>
+
+		<script src="js/libs/cordova-2.2.0.js"></script>
+    <script src="js/libs/websocket.js"></script>
+    <script src="js/smsplugin.js"></script>
+		<script src="http://js.pusher.com/1.12/pusher.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>
