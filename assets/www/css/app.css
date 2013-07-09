@@ -1,0 +1,73 @@
+.login-screen {
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+  padding:0;
+  z-index:11;
+}
+
+.tile-image.big-illustration {
+  height:auto;
+}
+.login-icon {
+  text-align:center;
+  width:311px;
+  position:initial;
+  margin:0 auto;
+}
+.login-icon img {
+  display:inline;
+}
+.login-form {
+  width:311px;
+  margin: 0 auto;
+}
+.login-form:before {
+  content: none;
+}
+
+.login-pane {
+  position: absolute;
+  top:50%;
+  left:50%;
+  margin-left: -178.5px;
+  margin-top: -216px;
+}
+.pad-box {
+  padding:7px;
+  padding-top:54px;
+}
+#connectionStatus, #subscriptionStatus {
+  text-transform: uppercase;
+  font-size:13px;
+}
+.todo li {
+  background:#34495e;
+}
+.todo-search:before {
+  content:"\e013";
+  left:auto;
+  right:20px;
+}
+.todo-search {
+  font-size:15px;
+  font-weight:bold;
+}
+.todo {
+  margin-top:7px;
+}
+.message {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav {
+  position:fixed;
+  z-index:10;
+  left:0;
+  right:0;
+  top:0;
+}
+

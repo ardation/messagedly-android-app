@@ -1,42 +1,69 @@
 ( function( $ ) {
 
-	document.addEventListener("deviceready", onDeviceReady, false);
+	//document.addEventListener("deviceready", onDeviceReady, false);
 
-  function onDeviceReady() {
+  function connect() {
 
-  	// Get device info
+  	/*/ Get device info
     var deviceInfo = 	'Device Name: '     + device.name     + '<br />' +
 									    'Device Cordova: '  + device.cordova  + '<br />' +
 									    'Device Platform: ' + device.platform + '<br />' +
 									    'Device UUID: '     + device.uuid     + '<br />' +
 									    'Device Version: '  + device.version  + '<br />';
-
   	$('#deviceProperties').html(deviceInfo)
+    */
 
   	// Connect
-     var pusher = new Pusher('519b9f47571c5d74bf82');
+    var pusher = new Pusher('1268146fc5d29f8982e5');
 
     pusher.connection.bind('state_change', connectionStateChange);
-    var channel = pusher.subscribe(device.uuid);
+    var channel = pusher.subscribe("LOL");//device.uuid);
     channel.bind('pusher:subscription_succeeded', subscriptionSucceeded);
     channel.bind('send_sms', handleMyEvent);
 
     window.sms = new SmsPlugin();
 
   	function connectionStateChange(state) {
-  		$('#connectionStatus').html(state.current);
+      if (state.current == 'connected') {
+        $('#connectionStatus').addClass('btn-success').html('<span class="fui-check"></span>' + state.current);
+      } else {
+        $('#connectionStatus').removeClass('btn-success').html('<span class="fui-cross"></span>' + state.current);
+      }
   	}
 
   	function subscriptionSucceeded() {
-  		$('#subscriptionStatus').html('succeeded');
+  		$('#subscriptionStatus').html('<span class="fui-check"></span>confirmed').addClass('btn-success');
   	}
 
   	function handleMyEvent( data ) {
-      window.sms.send(data.phone, data.message);
-  		$('#myEventData').append('<tr><td>'+data.phone+'</td><td>'+data.message+'</td></tr>');
+      //window.sms.send(data.phone, data.message);
+      $('#nomessage').remove();
+  		$('#myEventData').append('<li><div class="todo-icon fui-arrow-right"></div><div class="todo-content"><h4 class="todo-name">'+data.phone+'</h4><div class="message">'+data.message+'</div></div></li>');
   	}
 
   }
+
+  $('#login').submit(function() {
+    $("#login :input").blur().prop("disabled", true);
+    $("#login .control-group").removeClass('error');
+    $.post('http://www.messagedly.com/api/v1/sessions.json', { remote: true, commit: "Sign in", utf8: "✓", device: "JNDLKNFFGN34KJN", user: {email:$('#login-name').val(), password:$('#login-pass').val()} }, function(data) {
+        if (data.success) {
+          $(".login-screen").fadeOut();
+          connect();
+        } else {
+          $("#login :input").blur().prop("disabled", false);
+          $("#login .control-group").addClass('error');
+        }
+
+      });
+    return false;
+  });
+
+  $('#signout').click(function() {
+    $("#login :input").blur().prop("disabled", false);
+    $(".login-screen").fadeIn();
+
+  });
 
 } )( jQuery );
 
