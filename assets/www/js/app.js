@@ -40,7 +40,7 @@
   $('#login').submit(function() {
     $("#login :input").blur().prop("disabled", true);
     $("#login .control-group").removeClass('error');
-    $.post('/api/v1/sessions.json', { remote: true, commit: "Sign in", utf8: "✓", device: {name: device.name, version: device.version, uuid: device.uuid}, user: {email:$('#login-name').val(), password:$('#login-pass').val()} }, function(data) {
+    $.post('http://www.messagedly.com/api/v1/sessions.json', { remote: true, commit: "Sign in", utf8: "✓", device: {name: device.name, version: device.version, uuid: device.uuid}, user: {email:$('#login-name').val(), password:$('#login-pass').val()} }, function(data) {
         if (data.success) {
           $(".login-screen").fadeOut();
           connect();
